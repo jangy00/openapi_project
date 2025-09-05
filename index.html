@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리디북스</title>
+
+    <!-- Link Swiper's Css -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+
+
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header_top">
+                <div class="logo">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+                <div class="h_right">
+                    <div class="search">
+                    </div>
+                    <div class="mypahe">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="header_b">
+                <nav>
+                    <!-- <ul> -->
+                    <!-- <li><a href="#">웹툰</a></li>
+                    <li><a href="#">만화</a></li>
+                    <li><a href="#">웹소설</a></li>
+                    <li><a href="#">도서</a></li>
+                    <li><a href="#">셀렉트</a></li>
+                </ul> -->
+                </nav>
+
+                <div class="category"></div>
+            </div>
+        </div>
+    </header>
+
+    <div id="slider">
+        <!-- Swiper -->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">Slide 1; 
+                    <img src="img/slider1.webp">
+                </div>
+                <div class="swiper-slide">Slide 2</div>
+                <div class="swiper-slide">Slide 3</div>
+                <div class="swiper-slide">Slide 4</div>
+                <div class="swiper-slide">Slide 5</div>
+                <div class="swiper-slide">Slide 6</div>
+                <div class="swiper-slide">Slide 7</div>
+                <div class="swiper-slide">Slide 8</div>
+                <div class="swiper-slide">Slide 9</div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+    <div class="container_box">
+        <div class="C1_icon_bar"></div>
+        <div class="C1_icon_bar"></div>
+        <div class="C1_icon_bar"></div>
+        <div class="C1_icon_bar"></div>
+        <div class="C1_icon_bar"></div>
+        <div class="C1_icon_bar"></div>
+        <div class="C1_icon_bar"></div>
+    </div>
+
+    <!-- new -->
+    <div class="new">
+        <!-- Swiper -->
+        <div class="swiper newitem">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">Slide 1</div>
+                <div class="swiper-slide">Slide 2</div>
+                <div class="swiper-slide">Slide 3</div>
+                <div class="swiper-slide">Slide 4</div>
+                <div class="swiper-slide">Slide 5</div>
+                <div class="swiper-slide">Slide 6</div>
+                <div class="swiper-slide">Slide 7</div>
+                <div class="swiper-slide">Slide 8</div>
+                <div class="swiper-slide">Slide 9</div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer_box">
+                <div class="f_category"></div>
+                <div class="f_category"></div>
+                <div class="f_category"></div>
+                <div class="f_category"></div>
+                <div class="f_logo_box"></div>
+            </div>
+
+            <div class="f_contact"></div>
+
+
+        </div>
+
+
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+
+        // new
+        var swiper = new Swiper(".newitem", {
+            slidesPerView: 6,
+            spaceBetween: 10,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+
+    </script>
+
+</body>
+
+</html>
