@@ -1,177 +1,1099 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>리디북스</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>왓챠 클론 — 2025 최신 한국·해외 영화</title>
+  
+  <!-- 구글 아이콘 -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <!-- 구글 폰트 -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* 기본 리셋 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <!-- Link Swiper's Css -->
+    body {
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: #e6e6e6;
+      line-height: 1.6;
+      width: 100vw;
+      overflow-x: hidden;
+    }
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+    }
 
-    <link rel="stylesheet" href="./css/common.css">
-    <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+    ul { list-style: none; }
+    button { border: none; background: none; cursor: pointer; }
 
+    /* 앱 컨테이너 - 1920px 기준 */
+    .app {
+      width: 100%;
+      max-width: 1920px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
 
+    /* 1350 컨테이너 */
+    .wrap-1350 {
+      width: 100%;
+      max-width: 1350px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
+    /* 헤더 */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 80px;
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-grid {
+      display: flex;
+      align-items: center;
+      height: 80px;
+      justify-content: space-between;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* 로고 */
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+    }
+
+    .logo-mark {
+      width: 60px;
+      height: 36px;
+      background: linear-gradient(135deg, #ff2f6e, #ff6b9d);
+      color: white;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(255, 47, 110, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .logo-mark:hover {
+      transform: scale(1.05);
+    }
+
+    /* 메뉴 */
+    .primary-nav__list {
+      display: flex;
+      gap: 16px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      height: 36px;
+      padding: 0 14px;
+      border-radius: 18px;
+      color: #e8e8e8;
+      font-weight: 500;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .nav-link.active {
+      background: linear-gradient(135deg, #262626, #343434);
+      color: white;
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 검색 */
+    .search-form {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 300px;
+      height: 40px;
+      padding: 0 14px;
+      background: rgba(26, 26, 26, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .search-form:focus-within {
+      border-color: #ff2f6e;
+      box-shadow: 0 0 0 2px rgba(255, 47, 110, 0.2);
+    }
+
+    .search-form .material-symbols-outlined {
+      font-size: 20px;
+      color: #bdbdbd;
+    }
+
+    .search-input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: #eaeaea;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .search-input::placeholder {
+      color: #9a9a9a;
+    }
+
+    /* 버튼들 */
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(23, 23, 23, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .icon-btn:hover {
+      background: rgba(35, 35, 35, 0.9);
+      transform: scale(1.05);
+    }
+
+    .login-btn {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      padding: 0 16px;
+      background: linear-gradient(135deg, #ff2f6e, #ff6b9d);
+      color: white;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 4px 15px rgba(255, 47, 110, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(255, 47, 110, 0.4);
+    }
+
+    /* 서브 메뉴 */
+    .sub-nav {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 10, 10, 0.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .sub-nav__list {
+      display: flex;
+      gap: 12px;
+    }
+
+    .chip {
+      display: flex;
+      align-items: center;
+      height: 36px;
+      padding: 0 16px;
+      background: rgba(22, 22, 22, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      color: #e6e6e6;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .chip:hover {
+      background: rgba(35, 35, 35, 0.9);
+      transform: translateY(-1px);
+    }
+
+    .chip.active {
+      background: linear-gradient(135deg, #ff2f6e, #ff6b9d);
+      border-color: transparent;
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 47, 110, 0.3);
+    }
+
+    /* 공통 */
+    .section {
+      padding: 24px 0;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: white;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: #bdbdbd;
+      margin-bottom: 20px;
+    }
+
+    /* 로딩 & 오류 상태 */
+    .loading, .error {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 200px;
+      color: #bdbdbd;
+      font-size: 16px;
+      background: rgba(29, 29, 29, 0.5);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      margin: 10px;
+    }
+
+    .error {
+      color: #ff6b6b;
+    }
+
+    /* 슬라이더 */
+    .slider {
+      position: relative;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .slider-viewport {
+      overflow-x: auto;
+      overflow-y: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      background: rgba(29, 29, 29, 0.5);
+      backdrop-filter: blur(15px);
+      scroll-behavior: smooth;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      width: 100%;
+    }
+
+    .slider-viewport::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .slider-viewport::-webkit-scrollbar-thumb {
+      background: linear-gradient(90deg, #ff2f6e, #ff6b9d);
+      border-radius: 3px;
+    }
+
+    .slider-viewport::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* 슬라이더 높이 */
+    .h520 { height: 520px; }
+    .h180 { height: 180px; }
+    .h240 { height: 240px; }
+
+    /* 슬라이더 내용 */
+    .slides {
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      height: 100%;
+    }
+
+    .slides.multi {
+      width: fit-content;
+    }
+
+    /* 히어로 슬라이드 */
+    .slide.hero {
+      width: 100%;
+      min-width: calc(1350px - 44px);
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .hero-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .slide.hero:hover .hero-bg {
+      transform: scale(1.02);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      padding: 32px;
+      color: white;
+    }
+
+    .hero-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 12px;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .hero-genre, .hero-year, .hero-country {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 10px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-overview {
+      font-size: 16px;
+      opacity: 0.9;
+      max-width: 600px;
+      line-height: 1.5;
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* 영화 썸네일 */
+    .movie-thumb {
+      height: 100%;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .movie-thumb:hover {
+      transform: scale(1.05) translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .movie-thumb.wide { width: 260px; }
+    .movie-thumb.tall { width: 180px; }
+
+    .movie-poster {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .movie-thumb:hover .movie-poster {
+      transform: scale(1.1);
+    }
+
+    .movie-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.9));
+      padding: 16px;
+      color: white;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .movie-thumb:hover .movie-info {
+      transform: translateY(0);
+    }
+
+    .movie-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .movie-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .movie-year {
+      color: #bdbdbd;
+    }
+
+    .movie-country {
+      background: rgba(255, 47, 110, 0.8);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .movie-rating {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0,0,0,0.8);
+      color: #ffd700;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+    }
+
+    /* 슬라이더 버튼 */
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 80px;
+      background: rgba(22, 22, 22, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: white;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(15px);
+    }
+
+    .slider-btn:hover {
+      background: rgba(35, 35, 35, 0.95);
+      transform: translateY(-50%) scale(1.05);
+      border-color: rgba(255, 47, 110, 0.5);
+    }
+
+    .slider-btn.prev { left: -50px; }
+    .slider-btn.next { right: -50px; }
+
+    .slider-btn .material-symbols-outlined {
+      font-size: 24px;
+    }
+
+    /* 푸터 */
+    .app-footer {
+      background: linear-gradient(135deg, #121212, #1a1a1a);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 32px 0;
+      margin-top: 40px;
+    }
+
+    .footer-grid {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+
+    .footer-col {
+      flex: 1;
+    }
+
+    .footer-title {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: white;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-links a {
+      color: #a1a1a1;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ff2f6e;
+    }
+
+    .footer-text {
+      color: #a1a1a1;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 16px;
+      text-align: center;
+      color: #7c7c7c;
+      font-size: 14px;
+    }
+
+    /* 반응형 처리 */
+    @media (max-width: 1400px) {
+      .slider-btn.prev { left: -25px; }
+      .slider-btn.next { right: -25px; }
+    }
+
+    @media (max-width: 1200px) {
+      .slider-btn { display: none; }
+    }
+  </style>
 </head>
-
 <body>
-    <header>
-        <div class="container">
-            <div class="header_top">
-                <div class="logo">
-                    <i class="fa-brands fa-instagram"></i>
-                </div>
-                <div class="h_right">
-                    <div class="search">
-                    </div>
-                    <div class="mypahe">
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="header_b">
-                <nav>
-                    <!-- <ul> -->
-                    <!-- <li><a href="#">웹툰</a></li>
-                    <li><a href="#">만화</a></li>
-                    <li><a href="#">웹소설</a></li>
-                    <li><a href="#">도서</a></li>
-                    <li><a href="#">셀렉트</a></li>
-                </ul> -->
-                </nav>
-
-                <div class="category"></div>
-            </div>
+  <div class="app">
+    <!-- 헤더 -->
+    <header class="app-header">
+      <div class="wrap-1350">
+        <div class="header-grid">
+          <div class="header-left">
+            <a href="#" class="logo">
+              <span class="logo-mark">W</span>
+            </a>
+            
+            <nav class="primary-nav">
+              <ul class="primary-nav__list">
+                <li><a href="#" class="nav-link active">구독</a></li>
+                <li><a href="#" class="nav-link">개별 구매</a></li>
+                <li><a href="#" class="nav-link">웹툰</a></li>
+                <li><a href="#" class="nav-link">왓챠파티</a></li>
+              </ul>
+            </nav>
+          </div>
+          
+          <div class="header-right">
+            <form class="search-form" id="searchForm">
+              <span class="material-symbols-outlined">search</span>
+              <input type="search" class="search-input" placeholder="작품, 인물 검색" id="searchInput">
+            </form>
+            
+            <button type="button" class="icon-btn">
+              <span class="material-symbols-outlined">notifications</span>
+            </button>
+            
+            <a href="#" class="login-btn">로그인 / 회원가입</a>
+          </div>
         </div>
+      </div>
     </header>
 
-    <div id="slider">
-        <!-- Swiper -->
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">Slide 1; 
-                    <img src="img/slider1.webp">
-                </div>
-                <div class="swiper-slide">Slide 2</div>
-                <div class="swiper-slide">Slide 3</div>
-                <div class="swiper-slide">Slide 4</div>
-                <div class="swiper-slide">Slide 5</div>
-                <div class="swiper-slide">Slide 6</div>
-                <div class="swiper-slide">Slide 7</div>
-                <div class="swiper-slide">Slide 8</div>
-                <div class="swiper-slide">Slide 9</div>
+    <!-- 서브 메뉴 -->
+    <nav class="sub-nav">
+      <div class="wrap-1350">
+        <ul class="sub-nav__list">
+          <li><a href="#" class="chip active" data-category="trending">🔥트렌딩</a></li>
+          <li><a href="#" class="chip" data-category="korean">한국영화</a></li>
+          <li><a href="#" class="chip" data-category="popular">⭐인기작</a></li>
+          <li><a href="#" class="chip" data-category="now_playing">상영중</a></li>
+          <li><a href="#" class="chip" data-category="upcoming">개봉예정</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <!-- 메인 배너 -->
+      <section class="section">
+        <div class="wrap-1350">
+          <div class="slider" id="heroSlider">
+            <button class="slider-btn prev">
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <div class="slider-viewport h520">
+              <div class="slides" id="heroSlides">
+                <div class="loading">🎬 최신 화제작을 불러오는 중...</div>
+              </div>
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
+            <button class="slider-btn next">
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
         </div>
-    </div>
+      </section>
 
-    <div class="container_box">
-        <div class="C1_icon_bar"></div>
-        <div class="C1_icon_bar"></div>
-        <div class="C1_icon_bar"></div>
-        <div class="C1_icon_bar"></div>
-        <div class="C1_icon_bar"></div>
-        <div class="C1_icon_bar"></div>
-        <div class="C1_icon_bar"></div>
-    </div>
-
-    <!-- new -->
-    <div class="new">
-        <!-- Swiper -->
-        <div class="swiper newitem">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">Slide 1</div>
-                <div class="swiper-slide">Slide 2</div>
-                <div class="swiper-slide">Slide 3</div>
-                <div class="swiper-slide">Slide 4</div>
-                <div class="swiper-slide">Slide 5</div>
-                <div class="swiper-slide">Slide 6</div>
-                <div class="swiper-slide">Slide 7</div>
-                <div class="swiper-slide">Slide 8</div>
-                <div class="swiper-slide">Slide 9</div>
+      <!-- 2025 트렌딩 -->
+      <section class="section">
+        <div class="wrap-1350">
+          <h2 class="section-title">2025년 최신 영화</h2>
+          <p class="section-subtitle">지금 가장 화제인 영화들</p>
+          <div class="slider" id="trendingSlider">
+            <button class="slider-btn prev">
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <div class="slider-viewport h180">
+              <div class="slides multi" id="trendingSlides">
+                <div class="loading">트렌딩 영화를 불러오는 중...</div>
+              </div>
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
+            <button class="slider-btn next">
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
         </div>
+      </section>
 
-    </div>
-
-    <scetion>
-        <div class="text_bar">웹툰 실시간 랭킹</div>
-        <div class="section_box">
-            <div class="section_bar">section_bar1</div>
-            <div class="section_bar">section_bar2</div>
-            <div class="section_bar">section_bar3</div>
-            <div class="section_bar">section_bar4</div>
-            <div class="section_bar">section_bar5</div>
-            <div class="section_bar">section_bar6</div>
-            <div class="section_bar">section_bar7</div>
-            <div class="section_bar">section_bar8</div>
-            <div class="section_bar">section_bar9</div>
-
+      <!-- 한국 영화 -->
+      <section class="section">
+        <div class="wrap-1350">
+          <h2 class="section-title">한국 영화</h2>
+          <p class="section-subtitle">K-Cinema의 매력을 만나보세요</p>
+          <div class="slider" id="koreanSlider">
+            <button class="slider-btn prev">
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <div class="slider-viewport h240">
+              <div class="slides multi" id="koreanSlides">
+                <div class="loading">한국 영화를 불러오는 중...</div>
+              </div>
             </div>
-
-             <div class="text_bar2">요일별 웹툰</div>
-             <div class="text_ba3">더 보기</div>
-
-
-    </scetion>
-
-    <footer>
-        <div class="container">
-            <div class="footer_box">
-                <div class="f_category"></div>
-                <div class="f_category"></div>
-                <div class="f_category"></div>
-                <div class="f_category"></div>
-                <div class="f_logo_box"></div>
-            </div>
-
-            <div class="f_contact"></div>
-
-
+            <button class="slider-btn next">
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
         </div>
+      </section>
 
+      <!-- 현재 상영중 -->
+      <section class="section">
+        <div class="wrap-1350">
+          <h2 class="section-title">🎬 현재 상영중</h2>
+          <p class="section-subtitle">극장에서 만날 수 있는 최신작</p>
+          <div class="slider" id="nowPlayingSlider">
+            <button class="slider-btn prev">
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <div class="slider-viewport h180">
+              <div class="slides multi" id="nowPlayingSlides">
+                <div class="loading">🍿 상영중인 영화를 불러오는 중...</div>
+              </div>
+            </div>
+            <button class="slider-btn next">
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
 
+    <!-- 푸터 -->
+    <footer class="app-footer">
+      <div class="wrap-1350">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <div class="footer-title">이용 안내</div>
+            <ul class="footer-links">
+              <li><a href="#">이용약관</a></li>
+              <li><a href="#">개인정보 처리방침</a></li>
+              <li><a href="#">청소년 보호정책</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <div class="footer-title">CONTACT</div>
+            <div class="footer-text">
+              이메일: contact@watcha-clone.com<br>
+              고객센터: 1588-0000 (평일 10:00 ~ 18:00)<br>
+              주소: 서울특별시 강남구 테헤란로 123
+            </div>
+          </div>
+          <div class="footer-col">
+            <div class="footer-title">INFO</div>
+            <div class="footer-text">
+              본 페이지는 TMDB API를 활용한 실습 프로젝트입니다.<br>
+              2025년 최신 영화 정보를 실시간으로 제공합니다.
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          © 2025 WATCHA Clone with Korean Movies | Powered by TMDB API
+        </div>
+      </div>
     </footer>
+  </div>
 
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // TMDB API 설정
+    const API_KEY = '17a4bb5f06898610d5c57f854cdbc5b0';
+    const BASE_URL = 'https://api.themoviedb.org/3';
+    const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
 
-    <!-- Initialize Swiper -->
-    <script>
-        var swiper = new Swiper(".mySwiper", {
-
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
+    // API 요청 함수
+    async function fetchMovies(endpoint, params = {}) {
+      try {
+        const url = new URL(`${BASE_URL}${endpoint}`);
+        url.searchParams.set('api_key', API_KEY);
+        url.searchParams.set('language', 'ko-KR');
+        
+        // 추가 파라미터 설정
+        Object.keys(params).forEach(key => {
+          url.searchParams.set(key, params[key]);
         });
+        
+        console.log('🎬 API 요청:', url.toString());
+        
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        console.log(`✅ 영화 ${data.results?.length || 0}개 로드 완료`);
+        
+        return data.results || [];
+      } catch (error) {
+        console.error('❌ API 요청 실패:', error);
+        return [];
+      }
+    }
 
-        // new
-        var swiper = new Swiper(".newitem", {
-            slidesPerView: 6,
-            spaceBetween: 10,
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
+    // 한국 영화 검색 개선
+    async function fetchKoreanMovies() {
+      try {
+        console.log('🇰🇷 한국 영화 검색 시작...');
+        
+        // 한국어 원어 영화 검색
+        const koreanOriginal = await fetchMovies('/discover/movie', {
+          'with_original_language': 'ko',
+          'sort_by': 'popularity.desc',
+          'vote_count.gte': 10
         });
+        
+        // 추가 한국 영화 검색어들
+        const searchQueries = ['기생충', '오징어게임', '설국열차', '부산행', '올드보이'];
+        let searchResults = [];
+        
+        for (const query of searchQueries) {
+          const movies = await fetchMovies('/search/movie', { query });
+          searchResults = searchResults.concat(movies);
+        }
+        
+        // 모든 결과 합치기
+        const allMovies = [...koreanOriginal, ...searchResults];
+        
+        // 중복 제거 및 필터링
+        const uniqueMovies = allMovies
+          .filter((movie, index, self) =>
+            index === self.findIndex(m => m.id === movie.id) &&
+            movie.poster_path &&
+            movie.vote_average > 0
+          )
+          .slice(0, 20);
+        
+        console.log(`🇰🇷 한국 영화 ${uniqueMovies.length}개 발견`);
+        return uniqueMovies;
+        
+      } catch (error) {
+        console.error('❌ 한국 영화 검색 실패:', error);
+        return [];
+      }
+    }
 
-    </script>
+    // 국가 플래그 가져오기
+    function getCountryFlag(movie) {
+      if (movie.original_language === 'ko') return '🇰🇷';
+      if (movie.original_language === 'en') return '🇺🇸';
+      if (movie.original_language === 'ja') return '🇯🇵';
+      if (movie.original_language === 'zh') return '🇨🇳';
+      return '🌍';
+    }
 
+    // 히어로 슬라이드 생성
+    function createHeroSlide(movie) {
+      const backdropUrl = movie.backdrop_path 
+        ? `${IMAGE_BASE_URL}/w1280${movie.backdrop_path}`
+        : `${IMAGE_BASE_URL}/w1280${movie.poster_path}`;
+      
+      const year = movie.release_date ? new Date(movie.release_date).getFullYear() : '';
+      const country = getCountryFlag(movie);
+      
+      return `
+        <div class="slide hero">
+          <img src="${backdropUrl}" alt="${movie.title}" class="hero-bg" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4MCIgaGVpZ2h0PSI3MjAiIHZpZXdCb3g9IjAgMCAxMjgwIDcyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyODAiIGhlaWdodD0iNzIwIiBmaWxsPSIjMWQxZDFkIi8+Cjx0ZXh0IHg9IjY0MCIgeT0iMzYwIiBmaWxsPSIjYmRiZGJkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iYm9sZCI+Tm8gSW1hZ2U8L3RleHQ+Cjwvc3ZnPgo='">
+          <div class="hero-overlay">
+            <div class="hero-meta">
+              <span class="hero-country">${country}</span>
+              <span class="hero-year">${year}</span>
+              <span class="hero-genre">⭐ ${movie.vote_average.toFixed(1)}</span>
+            </div>
+            <div class="hero-title">${movie.title}</div>
+            <div class="hero-overview">${movie.overview || '줄거리 정보가 없습니다.'}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    // 일반 썸네일 생성
+    function createMovieThumb(movie, size = 'wide') {
+      const posterUrl = movie.poster_path 
+        ? `${IMAGE_BASE_URL}/w500${movie.poster_path}`
+        : 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQ1MCIgdmlld0JveD0iMCAwIDMwMCA0NTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iNDUwIiBmaWxsPSIjMWQxZDFkIiBzdHJva2U9IiMzYTNhM2EiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWRhc2hhcnJheT0iNSw1Ii8+Cjx0ZXh0IHg9IjE1MCIgeT0iMjI1IiBmaWxsPSIjYmRiZGJkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iYm9sZCI+Tm8gSW1hZ2U8L3RleHQ+Cjwvc3ZnPgo=';
+      
+      const year = movie.release_date ? new Date(movie.release_date).getFullYear() : '';
+      const rating = movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A';
+      const country = getCountryFlag(movie);
+      
+      return `
+        <div class="movie-thumb ${size}">
+          <img src="${posterUrl}" alt="${movie.title}" class="movie-poster" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQ1MCIgdmlld0JveD0iMCAwIDMwMCA0NTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iNDUwIiBmaWxsPSIjMWQxZDFkIiBzdHJva2U9IiMzYTNhM2EiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWRhc2hhcnJheT0iNSw1Ii8+Cjx0ZXh0IHg9IjE1MCIgeT0iMjI1IiBmaWxsPSIjYmRiZGJkIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iYm9sZCI+Tm8gSW1hZ2U8L3RleHQ+Cjwvc3ZnPgo='">
+          <div class="movie-rating">⭐ ${rating}</div>
+          <div class="movie-info">
+            <div class="movie-title">${movie.title}</div>
+            <div class="movie-meta">
+              <span class="movie-year">${year}</span>
+              <span class="movie-country">${country}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // 슬라이더 로드
+    async function loadSlider(sliderId, dataType, isHero = false, thumbSize = 'wide') {
+      const slidesContainer = document.getElementById(sliderId);
+      let movies = [];
+
+      try {
+        switch(dataType) {
+          case 'trending':
+            movies = await fetchMovies('/trending/movie/day');
+            break;
+          case 'korean':
+            movies = await fetchKoreanMovies();
+            break;
+          case 'popular':
+            movies = await fetchMovies('/movie/popular');
+            break;
+          case 'now_playing':
+            movies = await fetchMovies('/movie/now_playing');
+            break;
+          case 'upcoming':
+            movies = await fetchMovies('/movie/upcoming');
+            break;
+          default:
+            movies = await fetchMovies('/movie/popular');
+        }
+
+        if (movies.length === 0) {
+          slidesContainer.innerHTML = '<div class="error">영화를 불러올 수 없습니다 😢</div>';
+          return;
+        }
+
+        if (isHero) {
+          slidesContainer.innerHTML = movies.slice(0, 5)
+            .map(movie => createHeroSlide(movie))
+            .join('');
+        } else {
+          slidesContainer.innerHTML = movies
+            .filter(movie => movie.poster_path) // 포스터 있는 것만
+            .map(movie => createMovieThumb(movie, thumbSize))
+            .join('');
+        }
+        
+      } catch (error) {
+        console.error(`❌ ${sliderId} 로드 실패:`, error);
+        slidesContainer.innerHTML = '<div class="error">로딩 중 오류가 발생했습니다</div>';
+      }
+    }
+
+    // 슬라이더 버튼 초기화
+    function initSlider(sliderElement) {
+      const viewport = sliderElement.querySelector('.slider-viewport');
+      const slides = sliderElement.querySelector('.slides');
+      const prevBtn = sliderElement.querySelector('.slider-btn.prev');
+      const nextBtn = sliderElement.querySelector('.slider-btn.next');
+      
+      if (!viewport || !slides || !prevBtn || !nextBtn) return;
+      
+      // 히어로 슬라이더 체크
+      const isHeroSlider = slides.querySelector('.slide.hero');
+      
+      if (isHeroSlider) {
+        let currentIndex = 0;
+        const totalSlides = slides.children.length;
+        const slideWidth = viewport.clientWidth;
+        
+        prevBtn.addEventListener('click', () => {
+          if (currentIndex > 0) {
+            currentIndex--;
+            viewport.scrollLeft = currentIndex * slideWidth;
+          }
+        });
+        
+        nextBtn.addEventListener('click', () => {
+          if (currentIndex < totalSlides - 1) {
+            currentIndex++;
+            viewport.scrollLeft = currentIndex * slideWidth;
+          }
+        });
+        
+        // 자동 슬라이드 (8초마다)
+        let autoSlide = setInterval(() => {
+          currentIndex = (currentIndex + 1) % totalSlides;
+          viewport.scrollLeft = currentIndex * slideWidth;
+        }, 8000);
+
+        // 마우스 오버시 자동 슬라이드 중지
+        sliderElement.addEventListener('mouseenter', () => clearInterval(autoSlide));
+        sliderElement.addEventListener('mouseleave', () => {
+          autoSlide = setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            viewport.scrollLeft = currentIndex * slideWidth;
+          }, 8000);
+        });
+        
+      } else {
+        const thumbs = slides.querySelectorAll('.movie-thumb');
+        if (thumbs.length === 0) return;
+        
+        const thumbWidth = thumbs[0].offsetWidth + 12; // gap 포함
+        const visibleCount = Math.floor(viewport.clientWidth / thumbWidth);
+        const scrollAmount = thumbWidth * Math.max(1, visibleCount - 1);
+        
+        prevBtn.addEventListener('click', () => {
+          viewport.scrollLeft -= scrollAmount;
+        });
+        
+        nextBtn.addEventListener('click', () => {
+          viewport.scrollLeft += scrollAmount;
+        });
+      }
+    }
+
+    // 검색 기능
+    document.getElementById('searchForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const query = document.getElementById('searchInput').value.trim();
+      if (query) {
+        const trendingSlides = document.getElementById('trendingSlides');
+        trendingSlides.innerHTML = '<div class="loading">🔍 검색 중...</div>';
+        
+        const movies = await fetchMovies('/search/movie', { query });
+        if (movies.length > 0) {
+          trendingSlides.innerHTML = movies
+            .filter(movie => movie.poster_path)
+            .map(movie => createMovieThumb(movie, 'wide'))
+            .join('');
+        } else {
+          trendingSlides.innerHTML = '<div class="error">검색 결과가 없습니다 😔</div>';
+        }
+      }
+    });
+
+    // 카테고리 필터
+    document.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', async (e) => {
+        e.preventDefault();
+        
+        // 활성 상태 업데이트
+        document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        
+        const category = chip.dataset.category;
+        
+        // 트렌딩 슬라이더 업데이트
+        await loadSlider('trendingSlides', category, false, 'wide');
+        
+        // 슬라이더 버튼 재초기화
+        setTimeout(() => {
+          const slider = document.getElementById('trendingSlider');
+          initSlider(slider);
+        }, 100);
+      });
+    });
+
+    // 초기화 함수
+    async function init() {
+      console.log('🎬왓챠 클론 초기화 시작...');
+      
+      try {
+        // 히어로 슬라이더 - 트렌딩 영화
+        console.log('📽️히어로 슬라이더 로드 중...');
+        await loadSlider('heroSlides', 'trending', true);
+        
+        // 트렌딩 슬라이더
+        console.log('트렌딩 슬라이더 로드 중...');
+        await loadSlider('trendingSlides', 'trending', false, 'wide');
+        
+        // 한국 영화 슬라이더
+        console.log('한국 영화 슬라이더 로드 중...');
+        await loadSlider('koreanSlides', 'korean', false, 'tall');
+        
+        // 현재 상영중 슬라이더
+        console.log('🎬현재 상영중 슬라이더 로드 중...');
+        await loadSlider('nowPlayingSlides', 'now_playing', false, 'wide');
+        
+        // 슬라이더 버튼 초기화
+        setTimeout(() => {
+          document.querySelectorAll('.slider').forEach(initSlider);
+          console.log('✅ 모든 슬라이더 초기화 완료!');
+        }, 1000);
+        
+      } catch (error) {
+        console.error('❌ 초기화 실패:', error);
+      }
+    }
+
+    // DOM 로드 완료 시 실행
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
 </body>
-
-</html>ㄴ
+</html>
