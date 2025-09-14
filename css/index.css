@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-/* 기본 리셋 */
-=======
 @charset "utf-8";
 
->>>>>>> b4c5283 (20250914)
 * {
   margin: 0;
   padding: 0;
@@ -36,21 +32,13 @@ button {
   min-width: 1920px;
 }
 
-<<<<<<< HEAD
-/* 1350 컨테이너 */
-=======
 /* 1350 container */
->>>>>>> b4c5283 (20250914)
 .wrap-1350 {
   width: 1350px;
   margin: 0 auto;
 }
 
-<<<<<<< HEAD
-/* 헤더 */
-=======
 /* header */
->>>>>>> b4c5283 (20250914)
 .app-header {
   position: sticky;
   top: 0;
@@ -82,11 +70,7 @@ button {
   gap: 10px;
 }
 
-<<<<<<< HEAD
-/* 로고 */
-=======
 /* logo */
->>>>>>> b4c5283 (20250914)
 .logo {
   display: flex;
   align-items: center;
@@ -108,11 +92,7 @@ button {
   font-weight: bold;
 }
 
-<<<<<<< HEAD
-/* 메뉴 */
-=======
 /* menu */
->>>>>>> b4c5283 (20250914)
 .primary-nav {
   height: 75px;
   display: flex;
@@ -144,11 +124,7 @@ button {
   border-color: #343434;
 }
 
-<<<<<<< HEAD
-/* 검색 */
-=======
 /* search */
->>>>>>> b4c5283 (20250914)
 .search-form {
   display: flex;
   align-items: center;
@@ -179,11 +155,7 @@ button {
   color: #9a9a9a;
 }
 
-<<<<<<< HEAD
-/* 아이콘 버튼 */
-=======
 /* icon-btn */
->>>>>>> b4c5283 (20250914)
 .icon-btn {
   width: 40px;
   height: 40px;
@@ -196,11 +168,7 @@ button {
   color: white;
 }
 
-<<<<<<< HEAD
-/* 로그인 버튼 */
-=======
 /* login-btn */
->>>>>>> b4c5283 (20250914)
 .login-btn {
   display: flex;
   align-items: center;
@@ -213,11 +181,7 @@ button {
   font-size: 14px;
 }
 
-<<<<<<< HEAD
-/* 서브 메뉴 */
-=======
 /* sub menu */
->>>>>>> b4c5283 (20250914)
 .sub-nav {
   height: 80px;
   display: flex;
@@ -255,11 +219,7 @@ button {
   border-color: #3a3a3a;
 }
 
-<<<<<<< HEAD
-/* 공통 */
-=======
 /* section */
->>>>>>> b4c5283 (20250914)
 .section {
   padding: 24px 0;
 }
@@ -297,11 +257,7 @@ button {
   font-size: 14px;
 }
 
-<<<<<<< HEAD
-/* 슬라이더 */
-=======
 /* slider */
->>>>>>> b4c5283 (20250914)
 .slider {
   position: relative;
 }
@@ -328,19 +284,11 @@ button {
   background: transparent;
 }
 
-<<<<<<< HEAD
-/* 슬라이더 높이 */
-=======
->>>>>>> b4c5283 (20250914)
 .h590 { height: 590px; }
 .h170 { height: 170px; }
 .h190 { height: 190px; }
 .h720 { height: 720px; }
 
-<<<<<<< HEAD
-/* 슬라이더 내용 */
-=======
->>>>>>> b4c5283 (20250914)
 .slides {
   display: flex;
   gap: 10px;
@@ -371,11 +319,7 @@ button {
   width: 240px;
 }
 
-<<<<<<< HEAD
-/* 슬라이더 버튼 */
-=======
 /* slider-btn */
->>>>>>> b4c5283 (20250914)
 .slider-btn {
   position: absolute;
   top: 50%;
@@ -408,11 +352,7 @@ button {
   font-size: 28px;
 }
 
-<<<<<<< HEAD
-/* 푸터 */
-=======
 /* footer */
->>>>>>> b4c5283 (20250914)
 .app-footer {
   background: #121212;
   border-top: 1px solid #2a2a2a;
