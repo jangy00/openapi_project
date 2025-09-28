@@ -1,6 +1,6 @@
-/* sub.css - 서브 페이지 전용 스타일 */
+/* sub.css */
 
-/* 서브 페이지에서 헤더 투명 처리 */
+/* 헤더 투명 처리 */
 .app-header {
   position: fixed;
   top: 0;
@@ -336,7 +336,7 @@
   }
 }
 
-/* 태블릿 세로 및 모바일 (768px) */
+/* 모바일 */
 @media (max-width: 768px) {
   .app-header {
     background: rgba(0, 0, 0, 0.3);
@@ -362,7 +362,7 @@
     align-items: center;
   }
   
-  /* 모바일에서 포스터를 먼저 표시 (order 사용) */
+  /* 모바일에서 포스터를 먼저 표시 */
   .sub-right-section {
     order: -1; /* 포스터를 맨 위로 이동 */
     width: 100%;
@@ -564,7 +564,7 @@
   vertical-align: middle;
 }
 
-/* 스크롤 표시기 (옵션) */
+/* 스크롤 표시기 */
 .scroll-indicator {
   position: absolute;
   bottom: 30px;
