@@ -8,7 +8,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
   <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/index.css">
+  
   
 </head>
 <body>
@@ -60,32 +63,26 @@
     </nav>
 
     <main>
-      <!-- main banner -->
+      <!-- main banner - 정렬 개선 -->
       <section class="section">
-        <div class="container">
-          <div class="hero-slider-container">
-            <div class="slider hero-slider" id="heroSlider">
-              <button class="slider-btn prev">
-                <span class="material-symbols-outlined">chevron_left</span>
-              </button>
-              <div class="slider-viewport">
-                <div class="hero-slides" id="heroSlides">
-                  <div class="loading">최신 한국 개봉작을 불러오는 중...</div>
-                </div>
+        <div class="hero-slider-container">
+          <div class="slider hero-slider" id="heroSlider">
+            <button class="slider-btn prev">
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <div class="slider-viewport">
+              <div class="hero-slides" id="heroSlides">
+                <div class="loading">최신 한국 개봉작을 불러오는 중...</div>
               </div>
-              <button class="slider-btn next">
-                <span class="material-symbols-outlined">chevron_right</span>
-              </button>
             </div>
-            
-            <div class="hero-preview">
-              <div class="preview-article" id="previewArticle">
-                <div class="preview-next-indicator">다음</div>
-                <img src="" alt="" class="preview-poster" id="previewPoster">
-                <div class="preview-content">
-                  <div class="preview-title" id="previewTitle">다음 영화</div>
-                  <div class="preview-subtitle" id="previewSubtitle">곧 만나볼 수 있는 새로운 영화입니다.</div>
-                </div>
+          </div>
+          
+          <div class="hero-preview">
+            <div class="preview-article" id="previewArticle">
+              <img src="" alt="" class="preview-poster" id="previewPoster">
+              <div class="preview-content">
+                <div class="preview-title" id="previewTitle">다음 영화</div>
+                <div class="preview-subtitle" id="previewSubtitle">곧 만나볼 수 있는 새로운 영화입니다.</div>
               </div>
             </div>
           </div>
@@ -167,7 +164,7 @@
           </div>
         </div>
         <div class="footer-bottom">
-          © 2025 WATCHA Clone with Movies | Powered by TMDB API
+          © 2025 WATCHA Clone with Movies | Powered by TMDB
         </div>
       </div>
     </footer>

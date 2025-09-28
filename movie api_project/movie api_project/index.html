@@ -3,30 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>영화 상세 정보</title>
+  <title>movie</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="../css/index.css">
-  <link rel="stylesheet" href="css/sub.css">
+  <link rel="stylesheet" href="css/common.css">
   
 </head>
 <body>
   <div class="app">
     <!-- header -->
     <header class="app-header">
-      <div class="container">
+      <div  class="container">
         <div class="header-grid">
           <div class="header-left">
-            <a href="../index.html" class="logo">
+            <a href="#" class="logo">
               <span class="logo-mark">W</span>
             </a>
             
             <nav class="primary-nav">
               <ul class="primary-nav__list">
-                <li><a href="../index.html" class="nav-link">구독</a></li>
+                <li><a href="#" class="nav-link active">구독</a></li>
                 <li><a href="#" class="nav-link">개별 구매</a></li>
                 <li><a href="#" class="nav-link">웹툰</a></li>
               </ul>
@@ -49,28 +47,84 @@
       </div>
     </header>
 
+    <!-- sub menu -->
+    <nav class="sub-nav">
+      <div class="sub-nav__container">
+        <ul class="sub-nav__list">
+          <li><a href="#" class="chip active" data-category="trending">추천</a></li>
+          <li><a href="#" class="chip" data-category="korean">한국영화</a></li>
+          <li><a href="#" class="chip" data-category="popular">외국영화</a></li>
+          <li><a href="#" class="chip" data-category="now_playing">애니메이션</a></li>
+        </ul>
+      </div>
+    </nav>
+
     <main>
-      <!-- 영화 상세 정보 메인 컨테이너 -->
-      <section class="sub-main-section">
+      <!-- main banner -->
+      <section class="section">
         <div class="container">
-          <div class="sub-main-container" id="subMainContainer">
-            <div class="loading">영화 정보를 불러오는 중...</div>
+          <div class="hero-slider-container">
+            <div class="slider hero-slider" id="heroSlider">
+              <button class="slider-btn prev">
+                <span class="material-symbols-outlined">chevron_left</span>
+              </button>
+              <div class="slider-viewport">
+                <div class="hero-slides" id="heroSlides">
+                  <div class="loading">최신 한국 개봉작을 불러오는 중...</div>
+                </div>
+              </div>
+              <button class="slider-btn next">
+                <span class="material-symbols-outlined">chevron_right</span>
+              </button>
+            </div>
+            
+            <div class="hero-preview">
+              <div class="preview-article" id="previewArticle">
+                <div class="preview-next-indicator">다음</div>
+                <img src="" alt="" class="preview-poster" id="previewPoster">
+                <div class="preview-content">
+                  <div class="preview-title" id="previewTitle">다음 영화</div>
+                  <div class="preview-subtitle" id="previewSubtitle">곧 만나볼 수 있는 새로운 영화입니다.</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- 추천 영화 슬라이더 섹션 -->
+      <!-- 2025 trand -->
       <section class="section">
         <div class="container">
-          <h2 class="section-title">추천 영화</h2>
-          <p class="section-subtitle">선택하신 영화와 비슷한 장르의 추천 작품들</p>
-          <div class="slider poster-slider" id="recommendSlider">
+          <h2 class="section-title">2025년 최신 영화</h2>
+          <p class="section-subtitle">지금 가장 화제인 영화들</p>
+          <div class="slider poster-slider" id="trendingSlider">
             <button class="slider-btn prev">
               <span class="material-symbols-outlined">chevron_left</span>
             </button>
             <div class="slider-viewport">
-              <div class="poster-slides" id="recommendSlides">
-                <div class="loading">추천 영화를 불러오는 중...</div>
+              <div class="poster-slides" id="trendingSlides">
+                <div class="loading">트렌딩 영화를 불러오는 중...</div>
+              </div>
+            </div>
+            <button class="slider-btn next">
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- korean movie -->
+      <section class="section">
+        <div class="container">
+          <h2 class="section-title">한국 영화</h2>
+          <p class="section-subtitle">K-Cinema의 매력을 만나보세요</p>
+          <div class="slider poster-slider" id="koreanSlider">
+            <button class="slider-btn prev">
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <div class="slider-viewport">
+              <div class="poster-slides" id="koreanSlides">
+                <div class="loading">한국 영화를 불러오는 중...</div>
               </div>
             </div>
             <button class="slider-btn next">
@@ -113,14 +167,14 @@
           </div>
         </div>
         <div class="footer-bottom">
-          © 2025 WATCHA Clone with Movies | Powered by TMDB
+          © 2025 WATCHA Clone with Movies | Powered by TMDB API
         </div>
       </div>
     </footer>
   </div>
 
-  <!-- JS Files -->
-  <script src="../js/movie.js"></script>
-  <script src="js/sub.js"></script>
+  <!-- JS File -->
+  <script src="js/movie.js"></script>
+  <script src="js/movie2.js"></script>
 </body>
 </html>
